@@ -1,0 +1,47 @@
+<div class="col-md-6 offset-md-3">
+
+  <h3>Update Employee</h3>
+
+  <!--Create a form and add an event listener in it-->
+  <!--Use ng submit event to listen to form submission-->
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" class="form-control" id="firstName"
+             [(ngModel)]="employee.firstName" name="firstName">
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" id="lastName"
+             [(ngModel)]="employee.lastName" name="lastName">
+    </div>
+
+    <div class="form-group">
+      <label>Bu code</label>
+      <input type="text" class="form-control" id="buCode"
+             [(ngModel)]="employee.buCode" name="buCode">
+    </div>
+
+    <div class="form-group">
+      <label>Bu Name</label>
+      <input type="text" class="form-control" id="buName"
+             [(ngModel)]="employee.buName" name="buName">
+    </div>
+
+    <div class="form-group">
+      <label>Region Code</label>
+      <input type="text" class="form-control" id="regionCode"
+             [(ngModel)]="employee.regionCode" name="regionCode">
+    </div>
+
+    <div class="form-group">
+      <label>Region Name</label>
+      <input type="text" class="form-control" id="regionName"
+             [(ngModel)]="employee.regionName" name="regionName">
+    </div>
+
+    <button class="btn btn-success" type="submit">Submit</button>
+  </form>
+</div>
