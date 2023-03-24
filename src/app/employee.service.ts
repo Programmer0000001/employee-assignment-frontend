@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {catchError, Observable, throwError} from "rxjs";
 import {Employee} from "./employee";
 import {EmployeeRequestList} from "./employee-request-list";
 import {EmployeeRequest} from "./employee-request";
@@ -46,13 +46,33 @@ export class EmployeeService {
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
 
-    return this.httpClient.post(`${this.baseUrl}`, JSON.stringify(employeeRequestList), {headers: headers});
+    return this.httpClient.post(`${this.baseUrl}`, JSON.stringify(employeeRequestList), {headers: headers}).pipe(
+      catchError((error) => {
+        const errorMessage = error.error.errorMessage;
+
+        // Display the error message in an alert box
+        alert(errorMessage);
+
+        // Rethrow the error to propagate it to the component
+        return throwError(error);
+      })
+    );
   }
 
   //Method to get an employee by id
   getEmployeeById(id: number): Observable<Employee> {
     const params = new HttpParams().set('id', id.toString());
-    return this.httpClient.get<Employee>(this.baseUrl, {params});
+    return this.httpClient.get<Employee>(this.baseUrl, {params}).pipe(
+      catchError((error) => {
+        const errorMessage = error.error.errorMessage;
+
+        // Display the error message in an alert box
+        alert(errorMessage);
+
+        // Rethrow the error to propagate it to the component
+        return throwError(error);
+      })
+    );
   }
 
   //Method to update an employee
@@ -62,11 +82,31 @@ export class EmployeeService {
       employeeUpdateRequests: [employee]
     };
 
-    return this.httpClient.put(`${this.baseUrl}`, employeeUpdateList);
+    return this.httpClient.put(`${this.baseUrl}`, employeeUpdateList).pipe(
+      catchError((error) => {
+        const errorMessage = error.error.errorMessage;
+
+        // Display the error message in an alert box
+        alert(errorMessage);
+
+        // Rethrow the error to propagate it to the component
+        return throwError(error);
+      })
+    );
   }
 
-  //Method to delete an employee
+//Method to delete an employee
   deleteEmployee(id: number): Observable<Object> {
-    return this.httpClient.delete(`${this.baseUrl}?ids=${id}`);
+    return this.httpClient.delete(`${this.baseUrl}?ids=${id}`).pipe(
+      catchError((error) => {
+        const errorMessage = error.error.errorMessage;
+
+        // Display the error message in an alert box
+        alert(errorMessage);
+
+        // Rethrow the error to propagate it to the component
+        return throwError(error);
+      })
+    );
   }
 }
